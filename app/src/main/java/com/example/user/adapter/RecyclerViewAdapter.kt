@@ -33,6 +33,11 @@ class RecyclerViewAdapter(
         this.data.clear()
     }
 
+    fun getData(): ArrayList<StructUserItem>{
+
+        return this.data
+    }
+
     class MyViewHolder(holder: View): RecyclerView.ViewHolder(holder){
 
         val circleImageViewUserListItem = holder.findViewById(R.id.circleImageViewUserListItem) as CircleImageView
@@ -61,7 +66,7 @@ class RecyclerViewAdapter(
                     .load(avatarUrl)
                     .into(circleImageViewUserListItem)
             } else {
-                circleImageViewUserListItem.setImageResource(R.drawable.ic_launcher_background)
+                circleImageViewUserListItem.setImageResource(R.mipmap.ic_launcher_round)
             }
 
             tvLogin.text = login ?: ""

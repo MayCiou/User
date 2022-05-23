@@ -1,8 +1,12 @@
 package com.example.user.pagePresenter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import android.view.View
 import com.example.user.R
+import com.example.user.UserDetail
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.server.RetrofitHttp
 import com.example.user.struct.StructUserItem
@@ -51,5 +55,17 @@ class MainActivityPresenter(private val context : Context) {
             }, {
 
             })
+    }
+
+    fun onItemClick(activity: Activity, view: View, position: Int, data: ArrayList<StructUserItem>){
+
+        Log.i(tag, "position: $position")
+
+        val login = data[position].login
+        val i = Intent(context, UserDetail::class.java)
+        i.putExtra("login", login)
+
+        context.startActivity(i)
+        activity.finish()
     }
 }

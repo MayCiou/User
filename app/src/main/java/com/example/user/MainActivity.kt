@@ -2,12 +2,12 @@ package com.example.user
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,30 +30,32 @@ class MainActivity : AppCompatActivity() , MainActivityView{
     private var adapter : RecyclerViewAdapter? = null
     private var alertDialog: AlertDialog? = null
     private var service : RetrofitHttp? = null
-    private lateinit var context : Context
+    private lateinit var activity : Activity
     private val tag = javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        context = this
+        activity = this
 
         recyclerViewUserList = findViewById(R.id.recyclerViewUserList)
 
         service = RetrofitHttp()
 
-        mainActivityPresenter = MainActivityPresenter(context)
+        mainActivityPresenter = MainActivityPresenter(activity)
         mainActivityPresenter!!.setView(this)
 
-        loadingProgressDialog = LoadingProgressDialog(context)
+        loadingProgressDialog = LoadingProgressDialog(activity)
         loadingProgressDialog!!.create()
 
-        recyclerViewUserList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        adapter = RecyclerViewAdapter(context, object :
+        recyclerViewUserList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        adapter = RecyclerViewAdapter(activity, object :
             RecyclerViewAdapter.RecyclerItemClickListener{
             override fun onItemClick(view: View, position: Int) {
-                Log.i(tag, "position: $position")
+
+                mainActivityPresenter?.onItemClick(activity, view, position, adapter!!.getData())
+
             }
 
         })
@@ -110,10 +112,10 @@ class MainActivity : AppCompatActivity() , MainActivityView{
             dismissAlert()
         }
 
-        alertDialog = context.alert(message,title){
+        alertDialog = activity.alert(message,title){
 
             isCancelable = false
-            positiveButton(context.getString(R.string.confirm),positiveCb)
+            positiveButton(activity.getString(R.string.confirm),positiveCb)
 
         }.show()
     }
