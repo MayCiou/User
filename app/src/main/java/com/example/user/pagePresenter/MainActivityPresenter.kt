@@ -26,7 +26,7 @@ class MainActivityPresenter(private val context : Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                Log.i(tag, "getUserList : ${it.code()}")
+                Log.i(tag, "getUserList : ${it.code()}, count :${it.body()?.size?:-1}")
             },
             {
 
