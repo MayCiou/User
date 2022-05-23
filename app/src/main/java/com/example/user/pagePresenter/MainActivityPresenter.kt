@@ -46,16 +46,27 @@ class MainActivityPresenter(private val context : Context) {
 
                 if(it.isSuccessful)
                 {
-                    mainActivityView.updateListView(it.body()?:ArrayList<StructUserItem>())
+                    val array = it.body()?:ArrayList<StructUserItem>()
+                    mainActivityView.setItemTotal(array.size)
+                    mainActivityView.updateListView(array)
+                }else{
+                    val array = ArrayList<StructUserItem>()
+                    mainActivityView.setItemTotal(array.size)
+                    mainActivityView.updateListView(array)
                 }
 
             },
             {
 
                 //Log.e(tag, "getUserList : $it")
+                val array = ArrayList<StructUserItem>()
                 mainActivityView.dismissLoadingProgressDialog()
+                mainActivityView.setItemTotal(array.size)
+                mainActivityView.updateListView(array)
+
             }, {
                 mainActivityView.dismissLoadingProgressDialog()
+
             }, {
 
             })

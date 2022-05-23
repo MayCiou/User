@@ -14,4 +14,6 @@ interface MainActivityView {
     fun dismissAlert()
 
     fun updateListView(data: ArrayList<StructUserItem>)
+
+    fun setItemTotal(value: Int)
 }

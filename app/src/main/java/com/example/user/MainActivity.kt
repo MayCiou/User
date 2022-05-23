@@ -8,6 +8,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user.adapter.RecyclerViewAdapter
@@ -22,6 +23,7 @@ import org.jetbrains.anko.alert
 class MainActivity : AppCompatActivity() , MainActivityView{
 
     private lateinit var recyclerViewUserList : RecyclerView
+    private lateinit var txUserListTitle : TextView
 
     private var mainActivityPresenter : MainActivityPresenter? = null
     private var loadingProgressDialog : LoadingProgressDialog? = null
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() , MainActivityView{
         activity = this
 
         recyclerViewUserList = findViewById(R.id.recyclerViewUserList)
+        txUserListTitle = findViewById(R.id.txUserListTitle)
 
         service = RetrofitHttp()
 
@@ -138,6 +141,11 @@ class MainActivity : AppCompatActivity() , MainActivityView{
             notifyDataSetChanged()
         }
 
+    }
+
+    override fun setItemTotal(value: Int) {
+
+        txUserListTitle.text = String.format("%s - %d",activity.getString(R.string.user_list_title),value)
     }
 
 }
