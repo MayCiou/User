@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="user_list_title_margin">8dp</dimen>
-    <dimen name="user_list_title_text_size">15sp</dimen>
     <dimen name="user_list_recyclerview_margin_top">15dp</dimen>
     <dimen name="user_list_item_circle_image_view_margin">15dp</dimen>
     <dimen name="user_list_item_login_margin_left">15dp</dimen>
     <dimen name="user_list_item_site_admin_margin_top">8dp</dimen>
+
+
+    <dimen name="user_list_title_text_size">15sp</dimen>
+    <dimen name="user_list_item_site_admin_text_size">10sp</dimen>
+
 </resources>

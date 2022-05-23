@@ -51,9 +51,4 @@ class RetrofitHttp {
         return api!!
     }
 
-    fun getUserList(){
-
-        Log.i(tag, "getUserList")
-
-    }
 }

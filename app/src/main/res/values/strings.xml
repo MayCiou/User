@@ -2,4 +2,8 @@
     <string name="app_name">User</string>
     <string name="user_list_title">Users</string>
     <string name="user_list_item_site_admin">STAFF</string>
+
+    <string name="message">Message</string>
+    <string name="no_network_msg">No network</string>
+    <string name="confirm">Confirm</string>
 </resources>

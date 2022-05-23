@@ -2,8 +2,11 @@ package com.example.user.pagePresenter
 
 import android.content.Context
 import android.util.Log
+import com.example.user.R
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.server.RetrofitHttp
+import com.example.user.struct.UserItem
+import com.example.user.utils.networkUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -19,21 +22,32 @@ class MainActivityPresenter(private val context : Context) {
 
     fun getUserList(service: RetrofitHttp){
 
+        if(!networkUtil.isNetworkConnected(context))
+        {
+            mainActivityView.showAlert(
+                context.getString(R.string.message),
+                context.getString(R.string.no_network_msg)){}
+            return
+        }
+
         if(!service.initClient())return
 
-        service.getApi().getUsers()
+        mainActivityView.showLoadingProgressDialog()
+        service.getApi().getUsers(0, 100)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
                 Log.i(tag, "getUserList : ${it.code()}, count :${it.body()?.size?:-1}")
+                mainActivityView.showLoadingProgressDialog()
+                mainActivityView.updateListView(it.body()?:ArrayList<UserItem>())
             },
             {
 
                 Log.e(tag, "getUserList : $it")
-
+                mainActivityView.dismissLoadingProgressDialog()
             }, {
-
+                mainActivityView.dismissLoadingProgressDialog()
             }, {
 
             })

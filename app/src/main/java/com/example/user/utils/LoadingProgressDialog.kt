@@ -24,11 +24,12 @@ class LoadingProgressDialog(private val context: Context) {
 
     fun dismiss(){
 
-        if(dialog != null && dialog!!.isShowing)
-        {
-            dialog!!.dismiss()
-            dialog!!.cancel()
-        }
+        dialog?.takeIf {
+            it.isShowing
+        }?.apply {
 
+            dismiss()
+            cancel()
+        }
     }
 }

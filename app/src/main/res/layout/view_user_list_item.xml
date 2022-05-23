@@ -8,14 +8,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageViewUserListItem"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="@dimen/user_list_item_circle_image_view_margin"
         android:layout_marginTop="@dimen/user_list_item_circle_image_view_margin"
         android:layout_marginBottom="@dimen/user_list_item_circle_image_view_margin"
-        android:src="@drawable/ic_launcher_background"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="1dp"
+        app:civ_border_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/user_list_item_login_margin_left"
         android:text="login"
+        android:textColor="@color/user_list_item_login_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/circleImageViewUserListItem"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/user_list_item_site_admin_margin_top"
         android:text="@string/user_list_item_site_admin"
+        android:textSize="@dimen/user_list_item_site_admin_text_size"
         android:background="@drawable/shape_site_admin"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvLogin"

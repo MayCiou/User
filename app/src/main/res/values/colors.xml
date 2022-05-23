@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="bg_site_admin">#3A73D3</color>
+    <color name="user_list_item_login_text">#ABABAB</color>
 </resources>
