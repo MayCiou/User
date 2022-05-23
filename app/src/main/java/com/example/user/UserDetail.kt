@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -92,6 +93,15 @@ class UserDetail: AppCompatActivity(), UserDetailView, View.OnClickListener {
         mainActivityPresenter = null
         loadingProgressDialog = null
 
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mainActivityPresenter?.backOnClick(activity)
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun showLoadingProgressDialog() {
