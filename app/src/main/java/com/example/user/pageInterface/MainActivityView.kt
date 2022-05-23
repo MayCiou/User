@@ -1,8 +1,7 @@
 package com.example.user.pageInterface
 
-import android.content.Context
 import android.content.DialogInterface
-import com.example.user.struct.UserItem
+import com.example.user.struct.StructUserItem
 
 interface MainActivityView {
 
@@ -14,5 +13,5 @@ interface MainActivityView {
 
     fun dismissAlert()
 
-    fun updateListView(data: ArrayList<UserItem>)
+    fun updateListView(data: ArrayList<StructUserItem>)
 }

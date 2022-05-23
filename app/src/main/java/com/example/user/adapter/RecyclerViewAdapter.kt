@@ -8,14 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.user.R
-import com.example.user.struct.UserItem
+import com.example.user.struct.StructUserItem
 import de.hdodenhof.circleimageview.CircleImageView
 
 class RecyclerViewAdapter(
     private val context: Context,
     private val itemCb: RecyclerItemClickListener): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
-    private var data = ArrayList<UserItem>()
+    private var data = ArrayList<StructUserItem>()
     private val tag = javaClass.simpleName
 
     interface RecyclerItemClickListener{
@@ -23,7 +23,7 @@ class RecyclerViewAdapter(
         fun onItemClick(view: View, position: Int)
     }
 
-    fun setData(data: ArrayList<UserItem>){
+    fun setData(data: ArrayList<StructUserItem>){
 
         this.data = data
     }

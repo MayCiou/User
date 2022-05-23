@@ -5,7 +5,6 @@ import android.util.Log
 import com.example.user.R
 import com.example.user.pageInterface.UserDetailView
 import com.example.user.server.RetrofitHttp
-import com.example.user.struct.UserItem
 import com.example.user.utils.NetworkUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

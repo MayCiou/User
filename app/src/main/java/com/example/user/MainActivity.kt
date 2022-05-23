@@ -16,7 +16,7 @@ import com.example.user.adapter.RecyclerViewAdapter
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.pagePresenter.MainActivityPresenter
 import com.example.user.server.RetrofitHttp
-import com.example.user.struct.UserItem
+import com.example.user.struct.StructUserItem
 import com.example.user.utils.LoadingProgressDialog
 import org.jetbrains.anko.alert
 
@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() , MainActivityView{
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateListView(data: ArrayList<UserItem>) {
+    override fun updateListView(data: ArrayList<StructUserItem>) {
 
         adapter?.run {
 

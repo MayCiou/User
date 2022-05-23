@@ -5,7 +5,7 @@ import android.util.Log
 import com.example.user.R
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.server.RetrofitHttp
-import com.example.user.struct.UserItem
+import com.example.user.struct.StructUserItem
 import com.example.user.utils.NetworkUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -40,7 +40,7 @@ class MainActivityPresenter(private val context : Context) {
 
                 Log.i(tag, "getUserList : ${it.code()}, count :${it.body()?.size?:-1}")
                 mainActivityView.showLoadingProgressDialog()
-                mainActivityView.updateListView(it.body()?:ArrayList<UserItem>())
+                mainActivityView.updateListView(it.body()?:ArrayList<StructUserItem>())
             },
             {
 

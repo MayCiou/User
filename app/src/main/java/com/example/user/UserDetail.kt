@@ -5,22 +5,15 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.user.adapter.RecyclerViewAdapter
 import com.example.user.pageInterface.UserDetailView
-import com.example.user.pagePresenter.MainActivityPresenter
 import com.example.user.pagePresenter.UserDetailPresenter
 import com.example.user.server.RetrofitHttp
-import com.example.user.struct.UserItem
 import com.example.user.utils.LoadingProgressDialog
 import org.jetbrains.anko.alert
 
 class UserDetail: AppCompatActivity(), UserDetailView {
-
 
     private var mainActivityPresenter : UserDetailPresenter? = null
     private var loadingProgressDialog : LoadingProgressDialog? = null
@@ -36,7 +29,6 @@ class UserDetail: AppCompatActivity(), UserDetailView {
 
         context = this
 
-        recyclerViewUserList = findViewById(R.id.recyclerViewUserList)
 
         service = RetrofitHttp()
 
@@ -51,7 +43,7 @@ class UserDetail: AppCompatActivity(), UserDetailView {
     override fun onResume() {
         super.onResume()
 
-        mainActivityPresenter!!.getUserList(service!!)
+        mainActivityPresenter!!.getUserDetail(service!!)
     }
 
     @SuppressLint("NotifyDataSetChanged")
