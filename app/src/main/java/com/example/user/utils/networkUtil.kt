@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
-object networkUtil {
+object NetworkUtil {
 
     fun isNetworkConnected(context: Context): Boolean {
 

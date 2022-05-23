@@ -6,4 +6,5 @@
     <string name="message">Message</string>
     <string name="no_network_msg">No network</string>
     <string name="confirm">Confirm</string>
+    <string name="title_uer_detail">UserDetail</string>
 </resources>

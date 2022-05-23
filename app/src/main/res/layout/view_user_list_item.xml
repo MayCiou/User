@@ -8,11 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageViewUserListItem"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="@dimen/user_list_item_circle_image_view_margin"
-        android:layout_marginTop="@dimen/user_list_item_circle_image_view_margin"
-        android:layout_marginBottom="@dimen/user_list_item_circle_image_view_margin"
+        android:layout_width="@dimen/user_list_item_circle_image_height"
+        android:layout_height="@dimen/user_list_item_circle_image_height"
+        android:layout_marginStart="@dimen/user_list_item_circle_image_margin"
+        android:layout_marginTop="@dimen/user_list_item_circle_image_margin"
+        android:layout_marginBottom="@dimen/user_list_item_circle_image_margin"
         app:civ_border_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

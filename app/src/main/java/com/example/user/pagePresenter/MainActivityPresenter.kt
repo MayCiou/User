@@ -6,7 +6,7 @@ import com.example.user.R
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.server.RetrofitHttp
 import com.example.user.struct.UserItem
-import com.example.user.utils.networkUtil
+import com.example.user.utils.NetworkUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -22,7 +22,7 @@ class MainActivityPresenter(private val context : Context) {
 
     fun getUserList(service: RetrofitHttp){
 
-        if(!networkUtil.isNetworkConnected(context))
+        if(!NetworkUtil.isNetworkConnected(context))
         {
             mainActivityView.showAlert(
                 context.getString(R.string.message),

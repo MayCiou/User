@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.User">
         <activity
+            android:name=".UserDetail"
+            android:exported="true"
+            android:label="@string/title_uer_detail" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
