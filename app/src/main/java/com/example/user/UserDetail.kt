@@ -31,7 +31,7 @@ class UserDetail: AppCompatActivity(), UserDetailView, View.OnClickListener {
 
     private var mainActivityPresenter : UserDetailPresenter? = null
     private var loadingProgressDialog : LoadingProgressDialog? = null
-    private var adapter : RecyclerViewAdapter? = null
+
     private var alertDialog: AlertDialog? = null
     private var service : RetrofitHttp? = null
 
@@ -74,12 +74,6 @@ class UserDetail: AppCompatActivity(), UserDetailView, View.OnClickListener {
     override fun onStop() {
         super.onStop()
 
-        adapter?.run {
-
-            clearData()
-            notifyDataSetChanged()
-
-        }
     }
 
     override fun onDestroy() {
@@ -88,7 +82,6 @@ class UserDetail: AppCompatActivity(), UserDetailView, View.OnClickListener {
         service?.destroy()
         dismissLoadingProgressDialog()
         dismissAlert()
-        adapter = null
         service = null
         mainActivityPresenter = null
         loadingProgressDialog = null
