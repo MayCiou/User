@@ -42,13 +42,17 @@ class MainActivityPresenter(private val context : Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                Log.i(tag, "getUserList : ${it.code()}, count :${it.body()?.size?:-1}")
-                mainActivityView.showLoadingProgressDialog()
-                mainActivityView.updateListView(it.body()?:ArrayList<StructUserItem>())
+                //Log.i(tag, "getUserList : ${it.code()}, count :${it.body()?.size?:-1}")
+
+                if(it.isSuccessful)
+                {
+                    mainActivityView.updateListView(it.body()?:ArrayList<StructUserItem>())
+                }
+
             },
             {
 
-                Log.e(tag, "getUserList : $it")
+                //Log.e(tag, "getUserList : $it")
                 mainActivityView.dismissLoadingProgressDialog()
             }, {
                 mainActivityView.dismissLoadingProgressDialog()
@@ -59,7 +63,7 @@ class MainActivityPresenter(private val context : Context) {
 
     fun onItemClick(activity: Activity, view: View, position: Int, data: ArrayList<StructUserItem>){
 
-        Log.i(tag, "position: $position")
+        //Log.i(tag, "position: $position")
 
         val login = data[position].login
         val i = Intent(context, UserDetail::class.java)

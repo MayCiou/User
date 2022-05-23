@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.example.user.adapter.RecyclerViewAdapter
 import com.example.user.pageInterface.UserDetailView
 import com.example.user.pagePresenter.UserDetailPresenter

@@ -9,24 +9,11 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.user.MainActivity
 import com.example.user.R
-import com.example.user.UserDetail
 import com.example.user.pageInterface.UserDetailView
 import com.example.user.server.RetrofitHttp
-import com.example.user.struct.StructUserDetail
 import com.example.user.utils.NetworkUtil
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.json.JSONObject
-
-import retrofit2.adapter.rxjava2.Result.response
-import retrofit2.adapter.rxjava2.Result.response
-
-
-
-
-
-
 
 class UserDetailPresenter(private val context : Context) {
 
@@ -42,7 +29,6 @@ class UserDetailPresenter(private val context : Context) {
     fun setLogin(intent: Intent){
 
         login = intent.getStringExtra("login")?:""
-        Log.i(tag,"login: $login")
 
     }
 
@@ -64,7 +50,7 @@ class UserDetailPresenter(private val context : Context) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                       Log.i(tag, "getUserDetail : ${it.code()}")
+                       //Log.i(tag, "getUserDetail : ${it.code()}")
                        if(it.isSuccessful)
                        {
                            val userDetail = it.body()
@@ -97,7 +83,7 @@ class UserDetailPresenter(private val context : Context) {
             },
                 {
 
-                    Log.e(tag, "getUserDetail : $it")
+                    //Log.e(tag, "getUserDetail : $it")
                     userDetailView.dismissLoadingProgressDialog()
                 }, {
                     userDetailView.dismissLoadingProgressDialog()

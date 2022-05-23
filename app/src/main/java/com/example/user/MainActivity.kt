@@ -4,7 +4,6 @@ package com.example.user
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +11,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.user.adapter.RecyclerViewAdapter
-
 import com.example.user.pageInterface.MainActivityView
 import com.example.user.pagePresenter.MainActivityPresenter
 import com.example.user.server.RetrofitHttp
