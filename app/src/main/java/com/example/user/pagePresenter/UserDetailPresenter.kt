@@ -119,8 +119,6 @@ class UserDetailPresenter(private val context : Context) {
 
     fun backOnClick(activity: Activity){
 
-        val i= Intent(context, MainActivity::class.java)
-        context.startActivity(i)
         activity.finish()
     }
 }

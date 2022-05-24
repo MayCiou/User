@@ -90,17 +90,13 @@ class MainActivity : AppCompatActivity() , MainActivityView{
     override fun onStop() {
         super.onStop()
 
-        mainActivityPresenter?.clearUserArray()
-        adapter?.run {
-
-            clearData()
-            notifyDataSetChanged()
-
-        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
+        mainActivityPresenter?.clearUserArray()
+        adapter?.clearData()
 
         service?.destroy()
         dismissLoadingProgressDialog()

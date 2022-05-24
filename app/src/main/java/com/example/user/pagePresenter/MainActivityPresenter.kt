@@ -136,6 +136,5 @@ class MainActivityPresenter(private val context : Context) {
         i.putExtra("login", login)
 
         context.startActivity(i)
-        activity.finish()
     }
 }
