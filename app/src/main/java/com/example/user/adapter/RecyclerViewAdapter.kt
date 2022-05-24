@@ -1,6 +1,8 @@
 package com.example.user.adapter
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +15,9 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class RecyclerViewAdapter(
     private val context: Context,
-    private val itemCb: RecyclerItemClickListener): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+    private val itemCb: RecyclerItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var data = ArrayList<StructUserItem>()
+    private var data = ArrayList<StructUserItem?>()
     private val tag = javaClass.simpleName
 
     interface RecyclerItemClickListener{
@@ -23,9 +25,9 @@ class RecyclerViewAdapter(
         fun onItemClick(view: View, position: Int)
     }
 
-    fun setData(data: ArrayList<StructUserItem>){
+    fun setData(data: ArrayList<StructUserItem?>){
 
-        this.data = data
+        this.data.addAll(data)
     }
 
     fun clearData(){
@@ -33,9 +35,24 @@ class RecyclerViewAdapter(
         this.data.clear()
     }
 
-    fun getData(): ArrayList<StructUserItem>{
+    fun getData(): ArrayList<StructUserItem?>{
 
         return this.data
+    }
+
+    fun addLoadingView() {
+
+        Handler(Looper.getMainLooper()).post {
+            data.add(null)
+            notifyItemInserted(data.size - 1)
+        }
+    }
+
+    fun removeLoadingView() {
+
+        data.removeAt(data.size - 1)
+        notifyItemRemoved(data.size)
+
     }
 
     class MyViewHolder(holder: View): RecyclerView.ViewHolder(holder){
@@ -46,15 +63,25 @@ class RecyclerViewAdapter(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    class LoadingHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.view_user_list_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        if (viewType == Constant.VIEW_TYPE_ITEM) {
+            return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.view_user_list_item, parent, false))
+        } else{
+            //if (viewType == Constant.VIEW_TYPE_LOADING) {
+            return LoadingHolder(LayoutInflater.from(context).inflate(R.layout.view_progress_loading, parent, false))
+        }
+
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.apply{
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-            val userItem = data[position]
+        if(getItemViewType(position) == Constant.VIEW_TYPE_ITEM){
+
+            val userItem = data[position]?:return
+            val view = holder as MyViewHolder
 
             val avatarUrl = userItem.avatar_url
             val login = userItem.login
@@ -64,14 +91,14 @@ class RecyclerViewAdapter(
 
                 Glide.with(context)
                     .load(avatarUrl)
-                    .into(circleImageViewUserListItem)
+                    .into(view.circleImageViewUserListItem)
             } else {
-                circleImageViewUserListItem.setImageResource(R.mipmap.ic_launcher_round)
+                view.circleImageViewUserListItem.setImageResource(R.mipmap.ic_launcher_round)
             }
 
-            tvLogin.text = login ?: ""
+            view.tvLogin.text = login ?: ""
 
-            tvSiteAdmin.visibility = if(siteAdmin == null)
+            view.tvSiteAdmin.visibility = if(siteAdmin == null)
             {
                 View.INVISIBLE
             }else
@@ -94,4 +121,7 @@ class RecyclerViewAdapter(
 
     override fun getItemCount(): Int = data.size
 
+    override fun getItemViewType(position: Int): Int {
+        return if (data[position] == null) Constant.VIEW_TYPE_LOADING else Constant.VIEW_TYPE_ITEM
+    }
 }

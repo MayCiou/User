@@ -3,7 +3,6 @@ package com.example.user.pagePresenter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import com.example.user.R
 import com.example.user.UserDetail
@@ -17,6 +16,10 @@ import io.reactivex.schedulers.Schedulers
 class MainActivityPresenter(private val context : Context) {
 
     private lateinit var mainActivityView : MainActivityView
+    private var userArray = ArrayList<StructUserItem?>()
+    private var lastUserId = 0
+    private val perLoad = 20
+    private val loadMax = 100
     private val tag = javaClass.simpleName
 
     fun setView(mainActivityView: MainActivityView) {
@@ -24,7 +27,31 @@ class MainActivityPresenter(private val context : Context) {
         this.mainActivityView = mainActivityView
     }
 
-    fun getUserList(service: RetrofitHttp){
+    fun loadData(service: RetrofitHttp, isOnTouch : Boolean){
+
+        if(isOnTouch)
+        {
+            if(userArray.size != loadMax)
+            {
+                getUserList(service, isOnTouch)
+            }
+
+        }else
+        {
+            if(userArray.isEmpty())
+            {
+                getUserList(service, isOnTouch)
+            }
+        }
+
+    }
+
+    fun clearUserArray(){
+
+        this.userArray.clear()
+    }
+
+    private fun getUserList(service: RetrofitHttp, isOnTouch : Boolean){
 
         if(!NetworkUtil.isNetworkConnected(context))
         {
@@ -36,8 +63,17 @@ class MainActivityPresenter(private val context : Context) {
 
         if(!service.initClient())return
 
-        mainActivityView.showLoadingProgressDialog()
-        service.getApi().getUsers(0, 100)
+        if(isOnTouch)
+        {
+            mainActivityView.addLoadingView()
+        }else
+        {
+            mainActivityView.showLoadingProgressDialog()
+        }
+
+        val newAddUserArray = ArrayList<StructUserItem?>()
+
+        service.getApi().getUsers(lastUserId, perLoad)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -46,37 +82,56 @@ class MainActivityPresenter(private val context : Context) {
 
                 if(it.isSuccessful)
                 {
-                    val array = it.body()?:ArrayList<StructUserItem>()
-                    mainActivityView.setItemTotal(array.size)
-                    mainActivityView.updateListView(array)
-                }else{
-                    val array = ArrayList<StructUserItem>()
-                    mainActivityView.setItemTotal(array.size)
-                    mainActivityView.updateListView(array)
-                }
+                    val array = it.body()
+                    if(array != null)
+                    {
+                        lastUserId = array[array.size - 1]?.id?:0
+                        newAddUserArray.addAll(array)
+                        userArray.addAll(newAddUserArray)
+                    }
 
+                }
             },
             {
 
                 //Log.e(tag, "getUserList : $it")
-                val array = ArrayList<StructUserItem>()
-                mainActivityView.dismissLoadingProgressDialog()
-                mainActivityView.setItemTotal(array.size)
-                mainActivityView.updateListView(array)
+                if(isOnTouch)
+                {
+                    mainActivityView.removeLoadingView()
+                    mainActivityView.setLoaded()
+                }else
+                {
+                    mainActivityView.dismissLoadingProgressDialog()
+                }
+                newAddUserArray.clear()
 
             }, {
-                mainActivityView.dismissLoadingProgressDialog()
+                 if(isOnTouch)
+                 {
+                     mainActivityView.removeLoadingView()
+                     mainActivityView.updateListView(newAddUserArray)
+                     mainActivityView.setItemTotal(userArray.size)
+                     mainActivityView.setLoaded()
+                 }else
+                 {
+                     mainActivityView.dismissLoadingProgressDialog()
+                     mainActivityView.updateListView(newAddUserArray)
+                     mainActivityView.setItemTotal(userArray.size)
+
+                 }
+
+                    newAddUserArray.clear()
 
             }, {
 
             })
     }
 
-    fun onItemClick(activity: Activity, view: View, position: Int, data: ArrayList<StructUserItem>){
+    fun onItemClick(activity: Activity, view: View, position: Int, data: ArrayList<StructUserItem?>){
 
         //Log.i(tag, "position: $position")
 
-        val login = data[position].login
+        val login = data[position]?.login?:return
         val i = Intent(context, UserDetail::class.java)
         i.putExtra("login", login)
 

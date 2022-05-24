@@ -1,3 +1,3 @@
 package com.example.user.struct
 
-class StructUser : ArrayList<StructUserItem>()
+class StructUser : ArrayList<StructUserItem?>()

@@ -13,7 +13,13 @@ interface MainActivityView {
 
     fun dismissAlert()
 
-    fun updateListView(data: ArrayList<StructUserItem>)
+    fun updateListView(data: ArrayList<StructUserItem?>)
 
     fun setItemTotal(value: Int)
+
+    fun addLoadingView()
+
+    fun removeLoadingView()
+
+    fun setLoaded()
 }
