@@ -4,6 +4,7 @@
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
+* [Credits](#credits)  
 * [License](#license)
 
 
@@ -19,6 +20,9 @@
 - ConstraintLayout
 - RecyclerView
 
+## Credits
+Thank you.
+[a link](https://github.com/Pyush/Android-RecyclerView-Loadmore)
 
 ## License
 ```
