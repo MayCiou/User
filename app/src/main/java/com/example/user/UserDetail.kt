@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.user.adapter.RecyclerViewAdapter
 import com.example.user.pageInterface.UserDetailView
 import com.example.user.pagePresenter.UserDetailPresenter
 import com.example.user.server.RetrofitHttp

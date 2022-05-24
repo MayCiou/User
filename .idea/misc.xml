@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/layout_user_detail.xml" value="0.21944444444444444" />
+        <entry key="app/src/main/res/layout/view_progress_loading.xml" value="0.19427083333333334" />
       </map>
     </option>
   </component>

@@ -3,7 +3,6 @@ package com.example.user.pagePresenter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -120,8 +119,6 @@ class UserDetailPresenter(private val context : Context) {
 
     fun backOnClick(activity: Activity){
 
-        val i= Intent(context, MainActivity::class.java)
-        context.startActivity(i)
         activity.finish()
     }
 }
