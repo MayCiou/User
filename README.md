@@ -12,6 +12,7 @@
 - 架構為MVP
 - 使用Kotlin
 - 顯示github使用者列表及使用者資訊
+- 能使用多載方式加入資料
 
 
 ## Technologies Used
@@ -22,7 +23,7 @@
 
 ## Credits
 Thank you.
-[a link](https://github.com/Pyush/Android-RecyclerView-Loadmore)
+[Piyush](https://github.com/Pyush/Android-RecyclerView-Loadmore/README.markdown)
 
 ## License
 ```
